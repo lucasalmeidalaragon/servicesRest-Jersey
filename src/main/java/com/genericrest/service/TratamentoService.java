@@ -6,6 +6,7 @@
 package com.genericrest.service;
 
 import com.genericrest.model.Tratamento;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -13,4 +14,5 @@ import com.genericrest.model.Tratamento;
  */
 public interface TratamentoService extends CRUDRestService<Tratamento>{
     
+    Response getByNome(String nome);
 }

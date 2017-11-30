@@ -32,29 +32,8 @@ public class Tratamento extends AbstractEntity {
     public Tratamento() {
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.nome);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Tratamento other = (Tratamento) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        return true;
+    public Tratamento(String nome) {
+        this.nome = nome;
     }
 
     @Override
@@ -72,8 +51,8 @@ public class Tratamento extends AbstractEntity {
     
     @Override
     public void updateParameters(Object entity) {
-        final Tratamento tratamento = (Tratamento) entity;
-        this.nome = tratamento.getNome();
+        final Tratamento other = (Tratamento) entity;
+        this.nome = other.nome;
     }
     
 }

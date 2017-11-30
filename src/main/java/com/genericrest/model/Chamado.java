@@ -91,11 +91,11 @@ public class Chamado extends AbstractEntity{
 
     @Override
     public void updateParameters(Object entity) {
-       final Chamado chamado = (Chamado) entity;
-       this.data = chamado.getData(); 
-       this.paciente = chamado.getPaciente();
-       this.tratamento = chamado.getTratamento();
-       this.detalhes = chamado.getDetalhes();
+       final Chamado other = (Chamado) entity;
+       this.data = other.data; 
+       this.paciente = other.paciente;
+       this.tratamento = other.tratamento;
+       this.detalhes = other.detalhes;
     }
 
    

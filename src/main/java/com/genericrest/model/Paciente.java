@@ -58,9 +58,9 @@ public class Paciente extends AbstractEntity{
    
     @Override
     public void updateParameters(Object entity) {
-        final Paciente paciente = (Paciente) entity;
-        this.nome = paciente.getNome(); 
-        this.zona = paciente.getZona();
+        final Paciente other = (Paciente) entity;
+        this.nome = other.nome; 
+        this.zona = other.zona;
     }
     
       @Override

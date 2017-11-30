@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface ChamadoDAO extends DAO<Chamado, Long>{
     
-    List<Chamado> findByData(Date date);
+    Chamado findByData(Date date);
 }

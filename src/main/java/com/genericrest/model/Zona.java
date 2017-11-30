@@ -56,12 +56,11 @@ public class Zona extends AbstractEntity{
         this.hospital = hospital;
     }
     
-    
    
     @Override
     public void updateParameters(Object entity) {
-        final Zona zona = (Zona) entity;
-        this.nome = zona.getNome(); 
+        final Zona other = (Zona) entity;
+        this.nome = other.nome; 
     }
     
 

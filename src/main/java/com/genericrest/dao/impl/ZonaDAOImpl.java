@@ -7,8 +7,12 @@ package com.genericrest.dao.impl;
 
 import com.genericrest.dao.GenericDAO;
 import com.genericrest.dao.ZonaDAO;
+import com.genericrest.model.Paciente;
 import com.genericrest.model.Zona;
+import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +37,17 @@ public class ZonaDAOImpl extends GenericDAO<Zona, Long> implements ZonaDAO{
 
     @Override
     public Zona findByNome(String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = getEntityManager().createNamedQuery("Zona.findByNome", Zona.class);
+        query.setParameter("nome", nome);
+        List<Zona> zonas = query.getResultList();
+
+        if (zonas == null || zonas.isEmpty()) {
+            return null;
+        } else if (zonas.size() > 1) {
+            throw new NonUniqueResultException();
+        } else {
+            return zonas.get(0);
+        }
     }
     
 

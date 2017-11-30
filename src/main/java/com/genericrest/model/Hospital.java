@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "hospitais")
 public class Hospital extends AbstractEntity{
     
-    @Column(length = 255, nullable = false, updatable = false)
+    @Column(length = 255, nullable = false)
     private String nome;
     
     @Column(length = 255, nullable = false, updatable = false)
@@ -67,40 +67,6 @@ public class Hospital extends AbstractEntity{
         this.telefone = telefone;
     }
 
-    
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.nome);
-        hash = 97 * hash + Objects.hashCode(this.endereco);
-        hash = 97 * hash + Objects.hashCode(this.telefone);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Hospital other = (Hospital) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.endereco, other.endereco)) {
-            return false;
-        }
-        if (!Objects.equals(this.telefone, other.telefone)) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public String toString() {
         return "Hospital{" + "nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone + '}';
@@ -108,7 +74,10 @@ public class Hospital extends AbstractEntity{
 
     @Override
     public void updateParameters(Object entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final Hospital other = (Hospital) entity;
+       this.endereco = other.endereco; 
+       this.nome = other.nome;
+       this.telefone = other.telefone;
     }
     
 }

@@ -11,6 +11,7 @@ import com.genericrest.model.Chamado;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,15 +35,17 @@ public class ChamadoDAOImpl extends GenericDAO<Chamado, Long> implements Chamado
     }
 
     @Override
-    public List<Chamado> findByData(Date data) {
-        Query query = getEntityManager().createNamedQuery("Chamado.findByData", Chamado.class);
-        query.setParameter("data", data);
-        
+    public Chamado findByData(Date date) {
+        Query query = getEntityManager().createNamedQuery("Chamado.findByNome", Chamado.class);
+        query.setParameter("data", date);
         List<Chamado> chamados = query.getResultList();
-        if (chamados == null || chamados.isEmpty()){
+
+        if (chamados == null || chamados.isEmpty()) {
             return null;
+        } else if (chamados.size() > 1) {
+            throw new NonUniqueResultException();
         } else {
-            return chamados;
+            return chamados.get(0);
         }
     }
     

@@ -62,7 +62,7 @@ public class ChamadoRestService extends GenericCRUDRestService<Chamado> implemen
     
     public Response findByData(@PathParam("param") Date data) {
         getLogger().debug("Pesquise o chamado: {}", data);
-        List<Chamado> found = chamadoDAO.findByData(data);
+        Chamado found = chamadoDAO.findByData(data);
         if (found == null) {
             return Response.noContent().build();
         }
@@ -73,6 +73,7 @@ public class ChamadoRestService extends GenericCRUDRestService<Chamado> implemen
     public Response getBydata(Date data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
     
     

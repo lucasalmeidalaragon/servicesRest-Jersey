@@ -42,7 +42,11 @@ public class TratamentoRestService extends GenericCRUDRestService<Tratamento> im
     @Inject
     private TratamentoDAO tratamentoDAO;
     
-    
+    /**
+     * 
+     * @param list
+     * @return 
+     */
     @GET
     @Path("/nome/{param}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

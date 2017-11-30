@@ -7,8 +7,12 @@ package com.genericrest.dao.impl;
 
 import com.genericrest.dao.GenericDAO;
 import com.genericrest.dao.PacienteDAO;
+import com.genericrest.model.Hospital;
 import com.genericrest.model.Paciente;
+import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +36,17 @@ public class PacienteDAOImpl extends GenericDAO<Paciente, Long> implements Pacie
 
     @Override
     public Paciente findByNome(String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = getEntityManager().createNamedQuery("Paciente.findByNome", Paciente.class);
+        query.setParameter("nome", nome);
+        List<Paciente> pacientes = query.getResultList();
+
+        if (pacientes == null || pacientes.isEmpty()) {
+            return null;
+        } else if (pacientes.size() > 1) {
+            throw new NonUniqueResultException();
+        } else {
+            return pacientes.get(0);
+        }
     }
 
 }
